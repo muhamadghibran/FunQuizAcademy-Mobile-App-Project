@@ -54,7 +54,8 @@ FunQuiz Academy adalah **aplikasi fungsional lengkap** yang mendemonstrasikan pe
 <table>
 <tr>
 <td align="center" width="33%">
-<img src="https://placehold.co/300x600/667eea/ffffff?text=Welcome+Scree" alt="Welcome Screen" width="200"/>
+<img src="<img width="383" height="870" alt="Screenshot 2025-11-05 223949" src="https://github.com/user-attachments/assets/6ab42da9-f9c7-4914-979d-7f4fcab2e6ab" />
+" alt="Welcome Screen" width="200"/>
 <br><b>Layar Sambutan</b>
 </td>
 <td align="center" width="33%">
