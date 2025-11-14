@@ -8,7 +8,7 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)
 
-**Aplikasi kuis mobile cross-platform yang interaktif dan dinamis, dibangun dari nol dengan React Native**
+**Aplikasi kuis mobile cross-platform yang interaktif dan dinamis**
 
 [Demo](#-pratinjau-aplikasi) • [Fitur](#-fitur-utama) • [Teknologi](#️-teknologi--konsep) • [Instalasi](#-instalasi)
 
