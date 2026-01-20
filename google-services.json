@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "872676563356",
+    "project_id": "funquiz-academy",
+    "storage_bucket": "funquiz-academy.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:872676563356:android:856680aed08e6a68f95059",
+        "android_client_info": {
+          "package_name": "com.funquiz.academy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "872676563356-v3qcfb1aa5gljoegp6a9a2fpb9s99bnq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo54pCXL7qrMQaLb6eqd7VQ9jmwyltPLw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "872676563356-v3qcfb1aa5gljoegp6a9a2fpb9s99bnq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

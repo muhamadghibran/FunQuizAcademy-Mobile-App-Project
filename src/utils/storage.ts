@@ -1,5 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { UserProgress } from "../types";
+import {
+  getUserProfile,
+  saveUserProfile as dbSaveUserProfile,
+  initDatabase,
+} from "../services/DatabaseService";
 
 const STORAGE_KEYS = {
   USER_PROGRESS: "@funquiz_user_progress",
@@ -7,12 +12,17 @@ const STORAGE_KEYS = {
   FIRST_TIME: "@funquiz_first_time",
 };
 
+// Ensure DB is initialized somewhere. Usually mostly in App.tsx or earliest hook.
+// But here logic might run early. We will assume App calls init.
+// Or we can lazy init.
+
 export const saveUserProgress = async (
-  progress: UserProgress
+  progress: UserProgress,
 ): Promise<void> => {
   try {
-    const jsonValue = JSON.stringify(progress);
-    await AsyncStorage.setItem(STORAGE_KEYS.USER_PROGRESS, jsonValue);
+    // Save to SQLite
+    await dbSaveUserProfile(progress);
+    // Also Async for redundancy if needed, but per requirements we use SQLite.
   } catch (error) {
     console.error("Error saving user progress:", error);
   }
@@ -20,8 +30,8 @@ export const saveUserProgress = async (
 
 export const getUserProgress = async (): Promise<UserProgress | null> => {
   try {
-    const jsonValue = await AsyncStorage.getItem(STORAGE_KEYS.USER_PROGRESS);
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+    const data = await getUserProfile();
+    return data;
   } catch (error) {
     console.error("Error getting user progress:", error);
     return null;
@@ -30,6 +40,7 @@ export const getUserProgress = async (): Promise<UserProgress | null> => {
 
 export const saveUserName = async (name: string): Promise<void> => {
   try {
+    // If we are tracking simplistic username separately, we can keep AsyncStorage or migrate.
     await AsyncStorage.setItem(STORAGE_KEYS.USER_NAME, name);
   } catch (error) {
     console.error("Error saving user name:", error);
@@ -60,7 +71,7 @@ export const isFirstTimeUser = async (): Promise<boolean> => {
 };
 
 export const initializeUserProgress = async (
-  userName: string
+  userName: string,
 ): Promise<UserProgress> => {
   const defaultProgress: UserProgress = {
     userName,
@@ -70,6 +81,7 @@ export const initializeUserProgress = async (
     level: 1,
   };
 
+  await initDatabase(); // Ensure DB is ready
   await saveUserProgress(defaultProgress);
   await saveUserName(userName);
 

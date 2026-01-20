@@ -2,27 +2,29 @@
   "expo": {
     "name": "FunQuiz Academy",
     "slug": "funquiz-academy",
+    "scheme": "com.funquiz.academy",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
       "backgroundColor": "#6C63FF"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.funquizacademy.app"
+      "bundleIdentifier": "com.funquiz.academy"
     },
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#6C63FF"
       },
-      "package": "com.funquizacademy.app"
+      "package": "com.funquiz.academy",
+      "googleServicesFile": "./google-services.json"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-web-browser",
+      "@react-native-google-signin/google-signin"
     ]
   }
 }

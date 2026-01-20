@@ -19,6 +19,7 @@ import { ICONS, IMAGES } from "../constants/images";
 import { useQuiz } from "../hooks/useQuiz";
 import { getUserName } from "../utils/storage";
 import { CircularProgress } from "../components/CircularProgress";
+import { getQuestionsByCategory } from "../services/DatabaseService";
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
@@ -53,7 +54,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
       if (loadProgress) {
         loadProgress();
       }
-    }, [loadProgress])
+    }, [loadProgress]),
   );
 
   const loadUserName = async () => {
@@ -63,17 +64,33 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     }
   };
 
-  const handleCategoryPress = (category: Category) => {
+  const handleCategoryPress = async (category: Category) => {
     if (category.id === OTHER_ID) {
       console.log("Other Quiz diklik");
       return;
     }
 
-    const categoryQuizzes = QUIZZES[category.id] || [];
-    navigation.navigate("Quiz", {
-      category,
-      quizzes: categoryQuizzes,
-    });
+    try {
+      // Fetch from SQLite
+      const dbQuestions = await getQuestionsByCategory(category.id);
+
+      // Fallback to static if DB empty or error (optional, but good for stability during dev)
+      // For this task, we assume DB works as we seeded it.
+      const quizzesToUse =
+        dbQuestions.length > 0 ? dbQuestions : QUIZZES[category.id] || [];
+
+      navigation.navigate("Quiz", {
+        category,
+        quizzes: quizzesToUse,
+      });
+    } catch (e) {
+      console.error("Failed to load questions from DB", e);
+      // Fallback
+      navigation.navigate("Quiz", {
+        category,
+        quizzes: QUIZZES[category.id] || [],
+      });
+    }
   };
 
   const desiredOrder: { [key: string]: number } = {

@@ -11,12 +11,29 @@ import {
   StatusBar,
 } from "react-native";
 import { StackNavigationProp } from "@react-navigation/stack";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import { GoogleAuthProvider, signInWithCredential } from "firebase/auth";
+import { auth } from "../config/firebase";
 import { LinearGradient } from "expo-linear-gradient";
 import { RootStackParamList } from "../types";
 import { ICONS, ILLUSTRATIONS } from "../constants/images";
 import { initializeUserProgress } from "../utils/storage";
 import { FONT } from "../constants/fontfamily";
 import { COLORS } from "../constants/colors";
+
+// --- DYNAMIC IMPORT FOR NATIVE GOOGLE SIGN IN (Safe for Expo Go) ---
+let GoogleSignin: any = null;
+let statusCodes: any = null;
+try {
+  const nativeAuth = require("@react-native-google-signin/google-signin");
+  GoogleSignin = nativeAuth.GoogleSignin;
+  statusCodes = nativeAuth.statusCodes;
+} catch (e) {
+  console.log("Expo Go detected. Native Google Sign In disabled.");
+}
+
+WebBrowser.maybeCompleteAuthSession();
 
 type LoginScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
@@ -32,12 +49,58 @@ const { width, height } = Dimensions.get("window");
 export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
   const [showNameInput, setShowNameInput] = useState(false);
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleGoogleLoginAlert = () => {
-    Alert.alert(
-      "Fitur Segera Hadir",
-      "Login dengan Google akan tersedia di update berikutnya."
-    );
+  // 1. SETUP BROWSER AUTH (FOR EXPO GO)
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    webClientId:
+      "527681443058-es35sqgqlo9s7arukh8pbpas543fvh82.apps.googleusercontent.com",
+    androidClientId:
+      "527681443058-nmt0k8drq4p07ink38fj9k9mkqch8kkd.apps.googleusercontent.com",
+  });
+
+  // 2. HANDLE BROWSER RESPONSE
+  React.useEffect(() => {
+    if (response?.type === "success") {
+      const { id_token } = response.params;
+      const credential = GoogleAuthProvider.credential(id_token);
+
+      console.log("Browser Login Success. Authenticating with Firebase...");
+      signInWithCredential(auth, credential)
+        .then(async (userCredential) => {
+          console.log("Firebase Login Success:", userCredential.user.email);
+          await initializeUserProgress(
+            userCredential.user.displayName || "User",
+          );
+          navigation.replace("Home");
+        })
+        .catch((error) => {
+          console.error("Firebase Auth Error:", error);
+          Alert.alert(
+            "Login Failed",
+            "Pastikan API Key di firebase.ts cocok dengan Project 5276.",
+          );
+          setIsLoading(false);
+        });
+    } else if (response?.type === "error") {
+      console.error("Browser Auth Error:", response.error);
+      setIsLoading(false);
+    }
+  }, [response]);
+
+  const handleGoogleLogin = async () => {
+    if (isLoading) return;
+    setIsLoading(true);
+
+    // MODE: EXPO GO / BROWSER PRIORITY
+    if (request) {
+      console.log("Opening Browser Login (Expo Go Mode)...");
+      promptAsync();
+    } else {
+      // Fallback for Native if request is null (shouldn't happen in Expo Go)
+      Alert.alert("Error", "Google Auth Not Initialized. Check Internet.");
+      setIsLoading(false);
+    }
   };
 
   const handleShowNameInput = () => {
@@ -48,7 +111,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
     if (name.trim().length < 2) {
       Alert.alert(
         "Invalid Name",
-        "Please enter your name (at least 2 characters)"
+        "Please enter your name (at least 2 characters)",
       );
       return;
     }
@@ -180,7 +243,7 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
         <View style={styles.buttonSection}>
           <TouchableOpacity
             style={styles.googleButton}
-            onPress={handleGoogleLoginAlert}
+            onPress={handleGoogleLogin}
             activeOpacity={0.9}
           >
             <Image source={ICONS.googleG} style={styles.googleIcon} />
