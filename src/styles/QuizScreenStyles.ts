@@ -1,0 +1,208 @@
+import { StyleSheet } from "react-native";
+import { COLORS } from "../constants/colors";
+import { FONT } from "../constants/fontfamily";
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingTop: 50,
+    paddingBottom: 15,
+    position: "relative",
+  },
+  headerTablet: {
+    paddingHorizontal: 40,
+  },
+  closeButton: {
+    position: "absolute",
+    left: 20,
+    top: 50,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: "rgba(255, 255, 255, 0.15)",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1,
+  },
+  closeIcon: {
+    fontSize: 22,
+    color: COLORS.white,
+    fontWeight: "600",
+  },
+  timerWrapper: {
+    position: "absolute",
+    top: 50,
+    left: "50%",
+    transform: [{ translateX: -28 }, { scaleX: -1 }],
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  timerText: {
+    position: "absolute",
+    fontSize: 20,
+    fontWeight: "bold",
+    color: COLORS.white,
+    fontFamily: FONT.semiBold,
+    transform: [{ scaleX: -1 }],
+  },
+  coinDisplay: {
+    position: "absolute",
+    right: 20,
+    top: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: COLORS.white,
+    paddingLeft: 14,
+    paddingRight: 6,
+    paddingVertical: 6,
+    borderRadius: 20,
+    zIndex: 1,
+  },
+  coinText: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#272052",
+    marginRight: 6,
+  },
+  coinIconWrapper: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: "#927AFF",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  coinIcon: {
+    width: 18,
+    height: 18,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
+  contentWrapper: {
+    flex: 1,
+    paddingHorizontal: 20,
+    paddingBottom: 100,
+  },
+  contentWrapperTablet: {
+    paddingHorizontal: 60,
+    maxWidth: 900,
+    alignSelf: "center",
+    width: "100%",
+  },
+  animatedContainer: {
+    width: "100%",
+  },
+  topSection: {
+    paddingTop: 70,
+  },
+  bottomSection: {},
+  imageContainer: {
+    width: "100%",
+    height: 200,
+    borderRadius: 16,
+    overflow: "hidden",
+    marginBottom: 20,
+    backgroundColor: "rgba(0,0,0,0.1)",
+  },
+  imageContainerTablet: {
+    height: 350,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+  },
+  questionNumber: {
+    fontSize: 16,
+    color: COLORS.white,
+    marginBottom: 12,
+    opacity: 0.85,
+    fontFamily: FONT.medium,
+  },
+  question: {
+    fontSize: 28,
+    color: COLORS.white,
+    lineHeight: 38,
+    marginBottom: 30,
+    fontFamily: FONT.semiBold,
+  },
+  questionTablet: {
+    fontSize: 36,
+    lineHeight: 48,
+  },
+  answersContainer: {
+    marginBottom: 20,
+  },
+  gridAnswersContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  gridItem: {
+    width: "48%",
+    marginBottom: 16,
+  },
+  gridAnswers: {
+    marginTop: 20,
+  },
+  resultInfo: {
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  resultText: {
+    fontSize: 18,
+    color: COLORS.white,
+    fontFamily: FONT.semiBold,
+    textAlign: "center",
+    marginBottom: 15,
+  },
+  resultCoinIcon: {
+    width: 80,
+    height: 80,
+    resizeMode: "contain",
+  },
+  nextButtonContainer: {
+    position: "absolute",
+    bottom: 30,
+    right: 20,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-end",
+  },
+  nextButton: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: COLORS.white,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 4.65,
+    elevation: 8,
+  },
+  nextButtonText: {
+    color: COLORS.white,
+    fontFamily: FONT.bold,
+    fontSize: 16,
+    marginRight: 12,
+    letterSpacing: 0.5,
+  },
+  nextButtonIcon: {
+    width: 28,
+    height: 28,
+    tintColor: "#8B7BE8",
+    resizeMode: "contain",
+  },
+});

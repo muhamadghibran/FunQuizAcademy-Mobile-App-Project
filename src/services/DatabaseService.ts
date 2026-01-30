@@ -100,7 +100,7 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
   try {
     for (const cat of CATEGORIES) {
       await db.runAsync(
-        "INSERT INTO categories (id, name, description, color, total_questions) VALUES (?, ?, ?, ?, ?)",
+        "INSERT OR IGNORE INTO categories (id, name, description, color, total_questions) VALUES (?, ?, ?, ?, ?)",
         [
           cat.id,
           cat.name,
@@ -121,7 +121,7 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
           // without a mapping table.
 
           await db.runAsync(
-            "INSERT INTO questions (id, category_id, question, image_key, correct_answer, difficulty, points) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "INSERT OR IGNORE INTO questions (id, category_id, question, image_key, correct_answer, difficulty, points) VALUES (?, ?, ?, ?, ?, ?, ?)",
             [
               q.id,
               cat.id,
@@ -135,7 +135,7 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
 
           for (const ans of q.answers) {
             await db.runAsync(
-              "INSERT INTO answers (id, question_id, text) VALUES (?, ?, ?)",
+              "INSERT OR IGNORE INTO answers (id, question_id, text) VALUES (?, ?, ?)",
               [ans.id, q.id, ans.text],
             );
           }
@@ -161,23 +161,25 @@ export const getQuestionsByCategory = async (
 
   const result: Quiz[] = [];
 
+  // Helper to find static data for image hydration
+  const staticQuestions = QUIZZES[categoryId] || [];
+
   for (const q of questions) {
     const answers = await db.getAllAsync<Answer>(
       "SELECT id, text FROM answers WHERE question_id = ?",
       [q.id],
     );
 
-    // Map stored data back to Quiz object
-    // Note: Image handling is skipped for DB version for simplicity unless we map it.
-    // We will use a fallback or map based on ID if needed,
-    // BUT user asked to manage "Data soal". Ideally we return the structure.
-    // For the image, we might need to look it up from the original static list using ID if we want to preserve images.
+    // Hydrate image from static data if available
+    const staticQ = staticQuestions.find((sq) => sq.id === q.id);
+    const imageSource = staticQ ? staticQ.image : null;
+
     result.push({
       id: q.id,
-      category: categoryId, // Simplified
+      category: categoryId,
       categoryIcon: "", // Not stored in DB for now
       question: q.question,
-      image: null, // Placeholder
+      image: imageSource, // Restored image from static mapping
       answers: answers,
       correctAnswer: q.correct_answer,
       difficulty: q.difficulty,

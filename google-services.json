@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "872676563356-01hvvlch0fh3jk4hqvq4pk5kmitl9l10.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.funquiz.academy",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "872676563356-v3qcfb1aa5gljoegp6a9a2fpb9s99bnq.apps.googleusercontent.com",
           "client_type": 3
         }

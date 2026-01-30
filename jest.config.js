@@ -1,7 +1,7 @@
 module.exports = {
-  preset: "jest-expo",
+  preset: "react-native",
   transformIgnorePatterns: [
-    "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg)",
+    "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@react-native-google-signin)",
   ],
-  setupFilesAfterEnv: ["@testing-library/jest-native/extend-expect"],
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
 };

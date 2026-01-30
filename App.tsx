@@ -52,7 +52,7 @@ export default function App() {
   React.useEffect(() => {
     if (fontsLoaded && dbInitialized) {
       console.log("Conditions met. Hiding splash screen via useEffect...");
-      SplashScreen.hideAsync().catch((e) =>
+      SplashScreen.hideAsync().catch((e: unknown) =>
         console.warn("Hide splash failed:", e),
       );
     }

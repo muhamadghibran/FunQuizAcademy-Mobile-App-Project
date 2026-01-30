@@ -4,15 +4,14 @@ import { getAuth, initializeAuth } from "firebase/auth";
 const { getReactNativePersistence } = require("firebase/auth") as any;
 import ReactNativeAsyncStorage from "@react-native-async-storage/async-storage";
 
-// Your web app's Firebase configuration
+// Your web app's Firebase configuration (funquiz-academy project)
 const firebaseConfig = {
-  apiKey: "AIzaSyBY_6f30WQCQPO6CK_hgwagE2oIqqcdn2Y",
+  apiKey: "AIzaSyCo54pCXL7qrMQaLb6eqd7VQ9jmwyltPLw",
   authDomain: "funquiz-academy.firebaseapp.com",
   projectId: "funquiz-academy",
   storageBucket: "funquiz-academy.firebasestorage.app",
   messagingSenderId: "872676563356",
-  appId: "1:872676563356:web:a276052183edacc7f95059",
-  measurementId: "G-3264LLV7FX",
+  appId: "1:872676563356:android:856680aed08e6a68f95059",
 };
 
 // Initialize Firebase

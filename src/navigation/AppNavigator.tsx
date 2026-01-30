@@ -18,7 +18,11 @@ export const AppNavigator: React.FC = () => {
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
-          cardStyleInterpolator: ({ current: { progress } }) => ({
+          cardStyleInterpolator: ({
+            current: { progress },
+          }: {
+            current: { progress: any };
+          }) => ({
             cardStyle: {
               opacity: progress,
             },

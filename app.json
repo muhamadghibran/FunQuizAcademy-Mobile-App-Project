@@ -2,11 +2,13 @@
   "expo": {
     "name": "FunQuiz Academy",
     "slug": "funquiz-academy",
-    "scheme": "com.funquiz.academy",
+    "scheme": "funquizacademy",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "splash": {
+      "image": "./assets/images/icons/icon_coin_score.png",
+      "resizeMode": "contain",
       "backgroundColor": "#6C63FF"
     },
     "assetBundlePatterns": ["**/*"],
@@ -16,6 +18,7 @@
     },
     "android": {
       "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icons/icon_coin_score.png",
         "backgroundColor": "#6C63FF"
       },
       "package": "com.funquiz.academy",
