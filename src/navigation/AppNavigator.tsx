@@ -7,6 +7,10 @@ import { LoginScreen } from "../screens/LoginScreen";
 import { HomeScreen } from "../screens/HomeScreen";
 import { QuizScreen } from "../screens/QuizScreen";
 import { RankScreen } from "../screens/RankScreen";
+import { ProfileScreen } from "../screens/ProfileScreen";
+import { SettingScreen } from "../screens/SettingScreen";
+import { StatisticsScreen } from "../screens/StatisticsScreen";
+import { EditProfileScreen } from "../screens/EditProfileScreen";
 
 const Stack = createStackNavigator<RootStackParamList>();
 
@@ -55,6 +59,10 @@ export const AppNavigator: React.FC = () => {
 
         <Stack.Screen name="Quiz" component={QuizScreen} />
         <Stack.Screen name="RankScreen" component={RankScreen} />
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Settings" component={SettingScreen} />
+        <Stack.Screen name="Statistics" component={StatisticsScreen} />
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

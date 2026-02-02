@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import {
   View,
   ScrollView,
@@ -24,6 +24,8 @@ import { QuestionSection } from "../components/quiz/QuestionSection";
 import { AnswerList } from "../components/quiz/AnswerList";
 import { ResultFeedback } from "../components/quiz/ResultFeedback";
 
+import { useLanguage } from "../context/LanguageContext";
+
 type QuizScreenNavigationProp = StackNavigationProp<RootStackParamList, "Quiz">;
 type QuizScreenRouteProp = RouteProp<RootStackParamList, "Quiz">;
 
@@ -40,6 +42,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
   const { userProgress, addCoins, addScore } = useQuiz();
   const { width } = useWindowDimensions();
   const isTablet = width > 768;
+  const { t } = useLanguage();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -82,7 +85,13 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
     if (intervalRef.current) clearInterval(intervalRef.current);
     setSelectedAnswer(answerId);
     setShowResult(true);
-    const isCorrect = answerId === currentQuiz.correctAnswer;
+    // Use ID to ID check which is safe
+    const isCorrect =
+      answerId === currentQuiz.correctAnswer ||
+      answerId ===
+        currentQuiz.answers.find((a) => a.text === currentQuiz.correctAnswer)
+          ?.id;
+
     setIsAnswerCorrect(isCorrect);
     if (isCorrect) {
       const earnedPoints = currentQuiz.points || 10;
@@ -104,35 +113,62 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
     }
   };
 
+  const currentQuestionText = useMemo(() => {
+    const translated = t(currentQuiz.id as any);
+    return translated === currentQuiz.id ? currentQuiz.question : translated;
+  }, [currentQuiz, t]);
+
+  const shuffledAnswers = useMemo(() => {
+    if (!currentQuiz?.answers) return [];
+
+    const translatedAnswers = currentQuiz.answers.map((ans) => {
+      const key = `${currentQuiz.id}_${ans.id}`;
+      const translatedText = t(key as any);
+      return {
+        ...ans,
+        text: translatedText === key ? ans.text : translatedText,
+      };
+    });
+
+    return [...translatedAnswers].sort(() => Math.random() - 0.5);
+  }, [currentQuiz, t]);
+
+  const checkCorrectness = (ansId: string, ansText: string) => {
+    const trueAnswer = currentQuiz.answers.find(
+      (a) => a.text === currentQuiz.correctAnswer,
+    );
+    if (trueAnswer) {
+      return trueAnswer.id === ansId;
+    }
+    return ansText === currentQuiz.correctAnswer;
+  };
+
   const getAnswerState = (
+    answerId: string,
     answerText: string,
   ): "correct" | "wrong" | "default" | "disabled" | "hidden" => {
-    const isSelected = selectedAnswer === answerText;
-    const isCorrectAnswer = answerText === currentQuiz.correctAnswer;
+    const isSelected = selectedAnswer === answerId;
+    const isCorrect = checkCorrectness(answerId, answerText);
+
     if (showResult) {
       if (isAnswerCorrect) {
-        return isCorrectAnswer ? "correct" : "hidden";
+        return isCorrect ? "correct" : "hidden";
       } else {
         if (isSelected) return "wrong";
-        return isCorrectAnswer ? "correct" : "hidden";
+        return isCorrect ? "correct" : "hidden";
       }
     }
     return "default";
   };
 
-  const displayedAnswers = currentQuiz.answers
+  const displayedAnswers = shuffledAnswers
     .map((ans) => ({
       id: ans.id,
       text: ans.text,
-      state: getAnswerState(ans.text),
-      isCorrectAnswer: ans.text === currentQuiz.correctAnswer,
+      state: getAnswerState(ans.id, ans.text),
+      isCorrectAnswer: checkCorrectness(ans.id, ans.text),
     }))
-    .filter((ans) => ans.state !== "hidden")
-    .sort((a, b) => {
-      if (a.isCorrectAnswer && !b.isCorrectAnswer) return -1;
-      if (!a.isCorrectAnswer && b.isCorrectAnswer) return 1;
-      return 0;
-    });
+    .filter((ans) => ans.state !== "hidden");
 
   return (
     <LinearGradient colors={[...GRADIENTS.background]} style={styles.container}>
@@ -165,7 +201,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
               image={currentQuiz.image}
               currentQuestionIndex={currentQuestionIndex}
               totalQuestions={quizzes.length}
-              question={currentQuiz.question}
+              question={currentQuestionText}
             />
 
             <View
@@ -177,7 +213,21 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
                 onAnswerSelect={handleAnswerSelect}
                 disabled={showResult}
               />
-              {showResult && <ResultFeedback isCorrect={isAnswerCorrect} />}
+              {showResult && (
+                <View style={{ marginTop: 20, alignItems: "center" }}>
+                  <Text
+                    style={{
+                      color: COLORS.white,
+                      fontSize: 18,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {isAnswerCorrect ? t("correct") : t("wrong")}
+                    {isAnswerCorrect &&
+                      ` +${currentQuiz.points || 10} ${t("coinsEarned")}`}
+                  </Text>
+                </View>
+              )}
             </View>
           </Animated.View>
         </View>
@@ -188,7 +238,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
           entering={FadeInRight}
           style={styles.nextButtonContainer}
         >
-          <Text style={styles.nextButtonText}>NEXT</Text>
+          <Text style={styles.nextButtonText}>{t("next")}</Text>
           <TouchableOpacity
             style={styles.nextButton}
             onPress={handleNextQuestion}

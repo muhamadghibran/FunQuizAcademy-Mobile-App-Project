@@ -1,0 +1,135 @@
+import { StyleSheet, Platform, StatusBar } from "react-native";
+import { COLORS } from "../constants/colors";
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F9FAFB",
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingTop:
+      Platform.OS === "android" ? (StatusBar.currentHeight || 20) + 10 : 20,
+    paddingBottom: 20,
+    backgroundColor: COLORS.white,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F3F4F6",
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    color: COLORS.textDark,
+  },
+  backButton: {
+    padding: 8,
+    marginLeft: -8,
+  },
+  content: {
+    padding: 20,
+  },
+  sectionHeader: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: COLORS.textGray,
+    marginBottom: 12,
+    marginTop: 8,
+    marginLeft: 4,
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+  },
+  section: {
+    backgroundColor: COLORS.white,
+    borderRadius: 16,
+    overflow: "hidden",
+    marginBottom: 24,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 5,
+    elevation: 2,
+  },
+  settingItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F3F4F6",
+  },
+  itemLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  iconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    backgroundColor: "#F3F4F6",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 12,
+  },
+  itemTitle: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: COLORS.textDark,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  modalContent: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 20,
+    width: "80%",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 15,
+    textAlign: "center",
+    color: COLORS.textDark,
+  },
+  langOption: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: "#F3F4F6",
+  },
+  langOptionActive: {
+    backgroundColor: "#F3F4F6",
+    borderRadius: 10,
+  },
+  langText: {
+    fontSize: 16,
+    color: COLORS.textDark,
+  },
+  langTextActive: {
+    color: COLORS.primary,
+    fontWeight: "600",
+  },
+  closeButton: {
+    marginTop: 15,
+    paddingVertical: 10,
+    alignItems: "center",
+  },
+  closeButtonText: {
+    color: COLORS.textGray,
+    fontSize: 16,
+  },
+});

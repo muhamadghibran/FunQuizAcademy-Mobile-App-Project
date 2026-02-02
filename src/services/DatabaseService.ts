@@ -4,12 +4,17 @@ import { Category, Quiz, Answer } from "../types";
 
 const dbName = "funquiz.db";
 
+let dbInstance: SQLite.SQLiteDatabase | null = null;
+
 // Helper to get connection
 export const getDBConnection = async () => {
-  return await SQLite.openDatabaseAsync(dbName);
+  if (dbInstance) {
+    return dbInstance;
+  }
+  dbInstance = await SQLite.openDatabaseAsync(dbName);
+  return dbInstance;
 };
 
-// Initialize Database
 export const initDatabase = async () => {
   const db = await getDBConnection();
   try {
@@ -28,7 +33,7 @@ export const initDatabase = async () => {
         id TEXT PRIMARY KEY,
         category_id TEXT,
         question TEXT,
-        image_key TEXT, -- We will store a string key to map to the require() in code
+        image_key TEXT,
         correct_answer TEXT,
         difficulty TEXT,
         points INTEGER,
@@ -51,12 +56,11 @@ export const initDatabase = async () => {
       );
 
       CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY DEFAULT 1, -- Single user for now
+        id INTEGER PRIMARY KEY DEFAULT 1,
         json_data TEXT
       );
     `);
 
-    // Check if seeded
     const result = await db.getAllAsync<{ count: number }>(
       "SELECT count(*) as count FROM categories",
     );
@@ -68,11 +72,9 @@ export const initDatabase = async () => {
   }
 };
 
-// Users / Progress
 export const saveUserProfile = async (data: any) => {
   const db = await getDBConnection();
   const json = JSON.stringify(data);
-  // Upsert equivalent
   const existing = await db.getFirstAsync("SELECT id FROM users WHERE id = 1");
   if (existing) {
     await db.runAsync("UPDATE users SET json_data = ? WHERE id = 1", [json]);
@@ -94,9 +96,7 @@ export const getUserProfile = async () => {
   return null;
 };
 
-// Seed function
 const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
-  console.log("Seeding database...");
   try {
     for (const cat of CATEGORIES) {
       await db.runAsync(
@@ -113,13 +113,6 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
       const questions = QUIZZES[cat.id];
       if (questions) {
         for (const q of questions) {
-          // Note: image logic handles static requires. We'll store the path relative or ID if possible.
-          // Since requires are resolved at bundle time, we can't easily store 'require(...)' in DB.
-          // We will store a placeholder or just keep reading images from static file for now,
-          // OR mapped by ID. `quizData.ts` has 'image: require(...)'.
-          // We will store 'null' for image_key for now as dealing with static assets dynamically is complex
-          // without a mapping table.
-
           await db.runAsync(
             "INSERT OR IGNORE INTO questions (id, category_id, question, image_key, correct_answer, difficulty, points) VALUES (?, ?, ?, ?, ?, ?, ?)",
             [
@@ -142,13 +135,10 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
         }
       }
     }
-    console.log("Database seeded successfully.");
   } catch (e) {
     console.error("Error seeding database:", e);
   }
 };
-
-// CRUD Operations
 
 export const getQuestionsByCategory = async (
   categoryId: string,
@@ -177,9 +167,9 @@ export const getQuestionsByCategory = async (
     result.push({
       id: q.id,
       category: categoryId,
-      categoryIcon: "", // Not stored in DB for now
+      categoryIcon: "",
       question: q.question,
-      image: imageSource, // Restored image from static mapping
+      image: imageSource,
       answers: answers,
       correctAnswer: q.correct_answer,
       difficulty: q.difficulty,

@@ -15,6 +15,7 @@ import { HomeHeader } from "../components/home/HomeHeader";
 import { CategoryCarousel } from "../components/home/CategoryCarousel";
 import { GameCard } from "../components/home/GameCard";
 import { BottomNavigation } from "../components/home/BottomNavigation";
+import { useLanguage } from "../context/LanguageContext";
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;
 
@@ -33,6 +34,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const { width } = useResponsive();
   const [userName, setUserName] = useState("User");
   const [activeTab, setActiveTab] = useState("home");
+  const { t } = useLanguage();
 
   useEffect(() => {
     loadUserName();
@@ -53,7 +55,6 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   const handleCategoryPress = useCallback(
     async (category: Category) => {
       if (category.id === OTHER_ID) {
-        console.log("Other Quiz clicked");
         return;
       }
       try {
@@ -93,13 +94,21 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     [OTHER_ID]: COLORS.categories.other,
   };
 
-  // Static/Mock progress data
   const progressData: { [key: string]: string } = {
     [MATH_ID]: "60%",
     [SCIENCE_ID]: "40%",
     [ANIMALS_ID]: "60%",
     [SPORT_ID]: "20%",
     [OTHER_ID]: "40%",
+  };
+
+  const getCategoryName = (id: string) => {
+    if (id === "sport") return t("cat_sport");
+    if (id === "science") return t("cat_science");
+    if (id === "math") return t("cat_math");
+    if (id === "animals") return t("cat_animals");
+    if (id === "other") return t("cat_other");
+    return id;
   };
 
   const sortedCategories = useMemo(() => {
@@ -110,13 +119,17 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     });
   }, [desiredOrder]);
 
-  const categoryImages = [IMAGES.quizSport, IMAGES.quizScience];
-  const carouselCategories = CATEGORIES.slice(0, 2);
+  const carouselCategories = CATEGORIES;
+  const categoryImages = carouselCategories.map((c) => {
+    if (c.id === "sport") return IMAGES.quizSport;
+    if (c.id === "science") return IMAGES.quizScience;
+    return c.icon;
+  });
 
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <Text style={styles.loadingText}>Loading...</Text>
+        <Text style={styles.loadingText}>{t("loading")}</Text>
       </View>
     );
   }
@@ -125,13 +138,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
     <>
       <HomeHeader userName={userName} coins={userProgress.coins} />
       <CategoryCarousel
-        categories={carouselCategories}
+        categories={carouselCategories.map((c) => ({
+          ...c,
+          name: getCategoryName(c.id),
+        }))}
         categoryImages={categoryImages}
         screenWidth={width}
         onCategoryPress={handleCategoryPress}
       />
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Unfinished Games</Text>
+        <Text style={styles.sectionTitle}>{t("unfinishedGames")}</Text>
       </View>
     </>
   );
@@ -143,7 +159,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
 
     return (
       <GameCard
-        category={item}
+        category={{ ...item, name: getCategoryName(item.id) }}
         progressColor={color}
         progressData={progress}
         onPress={() => handleCategoryPress(item)}
@@ -152,14 +168,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const renderFooter = () => (
-    <View style={{ paddingHorizontal: 20 }}>
+    <View>
       <TouchableOpacity
         style={styles.gameCard}
         activeOpacity={0.8}
         onPress={() =>
           handleCategoryPress({
             id: OTHER_ID,
-            name: "Other Quiz",
+            name: t("otherQuiz"),
             icon: ICONS.listOther,
             color: COLORS.categories.other,
             totalQuestions: 20,
@@ -177,10 +193,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           <Image source={ICONS.listOther} style={styles.gameIcon} />
         </View>
         <View style={styles.gameInfo}>
-          <Text style={styles.gameTitle}>Other Quiz</Text>
-          <Text style={styles.gameQuestions}>20 Questions</Text>
+          <Text style={styles.gameTitle}>{t("otherQuiz")}</Text>
+          <Text style={styles.gameQuestions}>20 {t("questionsCount")}</Text>
         </View>
-        {/* Mock progress for Other Quiz */}
       </TouchableOpacity>
       <View style={styles.bottomSpacing} />
     </View>
@@ -205,7 +220,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
         }}
         onNavigateProfile={() => {
           setActiveTab("profile");
-          // navigation.navigate("Profile");
+          navigation.navigate("Profile");
         }}
         onNavigateRank={() => {
           setActiveTab("rank");

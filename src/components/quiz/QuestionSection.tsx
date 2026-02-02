@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 import { styles } from "../../styles/QuizScreenStyles";
+import { useLanguage } from "../../context/LanguageContext";
 
 interface QuestionSectionProps {
   isTablet: boolean;
@@ -17,6 +18,7 @@ export const QuestionSection: React.FC<QuestionSectionProps> = ({
   totalQuestions,
   question,
 }) => {
+  const { t } = useLanguage();
   return (
     <View style={styles.topSection}>
       {image && (
@@ -30,7 +32,7 @@ export const QuestionSection: React.FC<QuestionSectionProps> = ({
         </View>
       )}
       <Text style={styles.questionNumber}>
-        Question {currentQuestionIndex + 1} of {totalQuestions}
+        {t("questionOf")} {currentQuestionIndex + 1} {t("of")} {totalQuestions}
       </Text>
       <Text style={[styles.question, isTablet && styles.questionTablet]}>
         {question}

@@ -47,7 +47,7 @@ export const QUIZZES: { [key: string]: Quiz[] } = {
       id: "sport-1",
       category: "Sport",
       categoryIcon: "🏀",
-      question: "How many players are on a basketball team on the court?", // INI CONTOH YANG SUDAH BENAR (dari Anda):
+      question: "How many players are on a basketball team on the court?",
       image: require("../../assets/images/quizimage/sport/Quiz-1.jpg"),
       answers: [
         { id: "1", text: "5" },
@@ -330,7 +330,6 @@ export const QUIZZES: { [key: string]: Quiz[] } = {
     },
   ],
 
-  // --- SOAL SCIENCE ---
   science: [
     {
       id: "science-1",
@@ -619,7 +618,6 @@ export const QUIZZES: { [key: string]: Quiz[] } = {
     },
   ],
 
-  // --- SOAL MATEMATIKA ---
   math: [
     {
       id: "math-1",

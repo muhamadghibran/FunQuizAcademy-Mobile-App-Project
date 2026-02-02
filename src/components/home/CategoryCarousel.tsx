@@ -10,8 +10,6 @@ import {
 } from "react-native";
 import { Category } from "../../types";
 import { styles } from "../../styles/HomeScreenStyles";
-// Helper function to get image source if needed, or passed as prop.
-// For simplicity, passing images as parallel prop.
 
 interface CategoryCarouselProps {
   categories: Category[];
@@ -60,11 +58,29 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({
             onPress={() => onCategoryPress(category)}
             activeOpacity={0.9}
           >
-            <View style={styles.categoryImageContainer}>
+            <View
+              style={[
+                styles.categoryImageContainer,
+                !(category.id === "sport" || category.id === "science") && {
+                  backgroundColor: category.color + "25",
+                },
+              ]}
+            >
               <Image
                 source={categoryImages[index]}
-                style={styles.categoryImage}
-                resizeMode="cover"
+                style={[
+                  styles.categoryImage,
+                  !(category.id === "sport" || category.id === "science") && {
+                    resizeMode: "center",
+                    width: "60%",
+                    height: "60%",
+                  },
+                ]}
+                resizeMode={
+                  category.id === "sport" || category.id === "science"
+                    ? "cover"
+                    : "contain"
+                }
               />
             </View>
             <View style={styles.categoryContent}>
@@ -97,7 +113,6 @@ export const CategoryCarousel: React.FC<CategoryCarouselProps> = ({
             style={[styles.dot, activeSlideIndex === index && styles.dotActive]}
           />
         ))}
-        <View style={styles.dot} />
       </View>
     </>
   );

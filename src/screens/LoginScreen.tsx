@@ -55,10 +55,8 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       if (isErrorWithCode(error)) {
         switch (error.code) {
           case statusCodes.SIGN_IN_CANCELLED:
-            console.log("Login cancelled");
             break;
           case statusCodes.IN_PROGRESS:
-            console.log("Login in progress");
             break;
           case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
             Alert.alert("Error", "Google Play Services unavailable");

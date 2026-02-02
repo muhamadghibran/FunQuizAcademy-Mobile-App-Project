@@ -6,7 +6,7 @@ export const useVoiceInput = () => {
 
   const startListening = useCallback(() => {
     setIsListening(true);
-    // Simulate listening
+
     setTimeout(() => {
       setTranscript("Example voice input");
       setIsListening(false);

@@ -1,3 +1,4 @@
+import "react-native-gesture-handler";
 import React, { useCallback } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -7,11 +8,9 @@ import { View } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { initDatabase } from "./src/services/DatabaseService";
-import "react-native-gesture-handler"; // Ensure side effects
+import { LanguageProvider } from "./src/context/LanguageContext";
 
 SplashScreen.preventAutoHideAsync();
-
-console.log("App rendering...");
 
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -21,26 +20,17 @@ export default function App() {
   });
 
   if (fontError) {
-    console.error("Font Load Error:", fontError);
+    // Handle font error quietly or with specific error boundary
   }
 
   const [dbInitialized, setDbInitialized] = React.useState(false);
-  console.log(
-    `Render: fontsLoaded=${fontsLoaded}, dbInitialized=${dbInitialized}`,
-  );
-
-  console.log(
-    `Render: fontsLoaded=${fontsLoaded}, dbInitialized=${dbInitialized}`,
-  );
 
   React.useEffect(() => {
     const init = async () => {
       try {
-        console.log("Initializing DB...");
         await initDatabase();
-        console.log("DB Initialized");
       } catch (e) {
-        console.error("DB Init failed:", e);
+        // Error initializing DB
       } finally {
         setDbInitialized(true);
       }
@@ -51,10 +41,7 @@ export default function App() {
   // Force hide splash screen when ready
   React.useEffect(() => {
     if (fontsLoaded && dbInitialized) {
-      console.log("Conditions met. Hiding splash screen via useEffect...");
-      SplashScreen.hideAsync().catch((e: unknown) =>
-        console.warn("Hide splash failed:", e),
-      );
+      SplashScreen.hideAsync().catch(() => {});
     }
   }, [fontsLoaded, dbInitialized]);
 
@@ -64,11 +51,15 @@ export default function App() {
     return <View style={{ flex: 1, backgroundColor: "#FFFFFF" }} />;
   }
 
+  // ...
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <StatusBar style="light" backgroundColor="transparent" translucent />
-        <AppNavigator />
+        <LanguageProvider>
+          <StatusBar style="light" backgroundColor="transparent" translucent />
+          <AppNavigator />
+        </LanguageProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

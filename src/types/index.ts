@@ -52,4 +52,8 @@ export type RootStackParamList = {
     quizzes: Quiz[];
   };
   RankScreen: undefined;
+  Profile: undefined;
+  Settings: undefined;
+  Statistics: undefined;
+  EditProfile: undefined;
 };

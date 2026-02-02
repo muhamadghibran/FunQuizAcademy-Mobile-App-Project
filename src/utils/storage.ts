@@ -12,17 +12,12 @@ const STORAGE_KEYS = {
   FIRST_TIME: "@funquiz_first_time",
 };
 
-// Ensure DB is initialized somewhere. Usually mostly in App.tsx or earliest hook.
-// But here logic might run early. We will assume App calls init.
-// Or we can lazy init.
-
 export const saveUserProgress = async (
   progress: UserProgress,
 ): Promise<void> => {
   try {
     // Save to SQLite
     await dbSaveUserProfile(progress);
-    // Also Async for redundancy if needed, but per requirements we use SQLite.
   } catch (error) {
     console.error("Error saving user progress:", error);
   }
@@ -40,7 +35,6 @@ export const getUserProgress = async (): Promise<UserProgress | null> => {
 
 export const saveUserName = async (name: string): Promise<void> => {
   try {
-    // If we are tracking simplistic username separately, we can keep AsyncStorage or migrate.
     await AsyncStorage.setItem(STORAGE_KEYS.USER_NAME, name);
   } catch (error) {
     console.error("Error saving user name:", error);
@@ -81,7 +75,7 @@ export const initializeUserProgress = async (
     level: 1,
   };
 
-  await initDatabase(); // Ensure DB is ready
+  await initDatabase();
   await saveUserProgress(defaultProgress);
   await saveUserName(userName);
 
