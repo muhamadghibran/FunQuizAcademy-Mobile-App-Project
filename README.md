@@ -1,9 +1,11 @@
 <div align="center">
 
+  <img src="./assets/images/adaptive-icon.png" alt="Logo" width="120" height="120" />
+  
   <h1>🎓 FunQuiz Academy</h1>
   
   <p>
-    <strong>Play, Learn, and Explore with Exciting Quizzes!</strong>
+    <strong>Bermain, Belajar, dan Jelajahi Dunia dengan Kuis yang Menyenangkan!</strong>
   </p>
 
   <p>
@@ -15,7 +17,7 @@
   </p>
 
   <p>
-    <i>An engaging, interactive, and beautifully designed mobile learning application built with modern React Native technologies.</i>
+    <i>Aplikasi pembelajaran seluler yang interaktif, edukatif, dan didesain dengan indah menggunakan teknologi React Native modern.</i>
   </p>
 
   <br />
@@ -24,121 +26,192 @@
 
 ---
 
-## 📱 About The Project
+## 📱 Tentang Proyek
 
-**FunQuiz Academy** is a vibrant educational mobile application designed to make learning fun for users of all ages. It combines the excitement of gaming with educational content across various categories like **Mathematics**, **Science**, **Sports**, and **Animals**.
+**FunQuiz Academy** adalah aplikasi seluler edukasi yang dinamis, dirancang untuk membuat proses belajar menjadi pengalaman yang menyenangkan bagi pengguna dari segala usia. Aplikasi ini menggabungkan keseruan bermain _game_ dengan materi edukatif yang kaya di berbagai kategori seperti **Matematika**, **Sains**, **Olahraga**, dan **Dunia Hewan**.
 
-The app is built with a focus on **Clean Code**, **Performance**, and a **Premium User Experience (UX)**. It features smooth animations (Reanimated), offline capabilities (SQLite), and secure authentication (Firebase & Google Sign-In).
+Dikembangkan dengan filosofi **Clean Code** dan **Arsitektur Modern**, aplikasi ini menawarkan performa tinggi, tampilan antarmuka (UI/UX) yang premium, serta fitur-fitur canggih seperti mode _offline_ dan autentikasi aman.
 
-## ✨ Key Features
+### Mengapa FunQuiz Academy?
 
-- **🎨 Stunning UI/UX**: Immersive Glassmorphism effects, smooth gradients, and interactive animations using `react-native-reanimated`.
-- **🔐 Secure Authentication**:
-  - **Google Sign-In**: Seamless one-tap login.
-  - **Guest Mode**: Quick access with manual name entry.
-- **📚 Diverse Categories**:
-  - **🔢 Math**: Sharpen your calculation skills.
-  - **🔬 Science**: Explore the wonders of the universe.
-  - **🦁 Animals**: Learn about wildlife.
-  - **⚽ Sports**: Test your athletic knowledge.
-- **💾 Offline First**: Built with `expo-sqlite` to store questions, user progress, and history locally. Play anywhere, anytime!
-- **🏆 Leaderboard & Statistics**: Track your growth with detailed performance analytics and compare scores on the global leaderboard.
-- **🌍 Multi-Language Support**: Fully localized for **English** and **Indonesian (Bahasa Indonesia)**.
-- **⚙️ Customizable Settings**: Dark mode support, sound toggles, and notification preferences.
+- **Belajar Sambil Bermain**: Mengubah materi pelajaran yang membosankan menjadi kuis interaktif yang menantang.
+- **Desain Premium**: Menggunakan gaya desain modern dengan efek _Glassmorphism_, gradasi warna yang halus, dan tipografi yang nyaman dibaca.
+- **Akses Mudah**: Dapat dimainkan kapan saja dan di mana saja, baik secara _online_ maupun _offline_.
 
-## 🛠️ Tech Stack
+---
 
-- **Framework**: [React Native](https://reactnative.dev/) (Expo SDK 52)
-- **Language**: TypeScript
-- **Navigation**: React Navigation (Stack)
-- **State Management**: React Context API
-- **Styling**: StyleSheet (Modularized & Clean), Expo Constants for safe areas.
-- **Database**: Expo SQLite (Local), MockAPI (Leaderboard).
-- **Backend / Auth**: Firebase Authentication.
-- **Assets**: Expo Fonts (`Gilroy`), Expo Image, Expo AV.
+## ✨ Fitur Unggulan
 
-## � Screenshots
+Aplikasi ini dilengkapi dengan berbagai fitur canggih yang memanjakan pengguna:
 
-|                             Welcome Screen                              |                            Home Screen                            |                          Quiz Interface                           |
-| :---------------------------------------------------------------------: | :---------------------------------------------------------------: | :---------------------------------------------------------------: |
-| <img src="./assets/screenshots/welcome.png" alt="Welcome" width="200"/> | <img src="./assets/screenshots/home.png" alt="Home" width="200"/> | <img src="./assets/screenshots/quiz.png" alt="Quiz" width="200"/> |
+### 1. 🎨 Antarmuka Pengguna (UI/UX) yang Memukau
 
-|                            Leaderboard                            |                                 Profile                                 |                             Statistics                              |
-| :---------------------------------------------------------------: | :---------------------------------------------------------------------: | :-----------------------------------------------------------------: |
-| <img src="./assets/screenshots/rank.png" alt="Rank" width="200"/> | <img src="./assets/screenshots/profile.png" alt="Profile" width="200"/> | <img src="./assets/screenshots/stats.png" alt="Stats" width="200"/> |
+- **Animasi Halus**: Integrasi `react-native-reanimated` memberikan transisi antar layar yang sangat mulus dan responsif.
+- **Desain Modern**: Tata letak yang bersih dan intuitif memudahkan navigasi bagi pengguna baru sekalipun.
+- **Responsif**: Tampilan yang menyesuaikan dengan baik di berbagai ukuran layar perangkat seluler.
 
-> _Note: Add your actual screenshots to an `assets/screenshots` folder to display them here._
+### 2. 🔐 Sistem Autentikasi Aman & Fleksibel
 
-## 🚀 Getting Started
+- **Google Sign-In**: Masuk dengan cepat dan aman hanya dengan satu ketukan menggunakan akun Google Anda.
+- **Mode Tamu (Guest Mode)**: Ingin mencoba aplikasi tanpa ribet? Masuk sebagai tamu dengan memasukkan nama panggilan, data Anda tetap tersimpan secara lokal.
 
-Follow these steps to set up the project locally on your machine.
+### 3. 📚 Kategori Kuis yang Beragam
 
-### Prerequisites
+Tantang pengetahuan Anda dalam berbagai bidang:
 
-- Node.js (LTS version recommended)
-- npm or yarn
-- Expo Go app on your mobile device (iOS/Android)
+- **🔢 Matematika**: Asah kemampuan berhitung cepat dan logika angka.
+- **🔬 Sains**: Jelajahi fakta-fakta menarik tentang alam semesta, fisika, dan biologi.
+- **🦁 Hewan**: Kenali berbagai spesies hewan dari seluruh dunia.
+- **⚽ Olahraga**: Tes wawasan Anda tentang dunia olahraga global.
+- **Dan Lainnya**: Kategori tambahan yang terus diperbarui!
 
-### Installation
+### 4. 💾 Mode Offline (Offline-First)
 
-1.  **Clone the repository**
+Tidak ada sinyal? Tidak masalah!
+
+- **Database Lokal**: Menggunakan `expo-sqlite` untuk menyimpan ribuan pertanyaan dan jawaban langsung di perangkat Anda.
+- **Sinkronisasi Cerdas**: Riwayat permainan dan skor Anda tersimpan aman secara lokal dan akan disinkronkan saat Anda kembali _online_.
+
+### 5. 🏆 Papan Peringkat & Statistik
+
+- **Leaderboard Global**: Bandingkan skor tertinggi Anda dengan pemain lain di seluruh dunia (menggunakan MockAPI).
+- **Statistik Personal**: Pantau perkembangan belajar Anda dengan grafik dan riwayat nilai yang terperinci. Lihat di mana kekuatan dan kelemahan Anda.
+
+### 6. 🌍 Dukungan Multi-Bahasa
+
+Aplikasi ini inklusif dan dapat dinikmati oleh lebih banyak orang:
+
+- **Bahasa Inggris (English)**
+- **Bahasa Indonesia**
+- _Bahasa dapat diganti secara instan melalui menu Pengaturan._
+
+### 7. ⚙️ Personalisasi Pengguna
+
+- **Mode Gelap (Dark Mode)**: (Coming Soon) Dukungan tema gelap untuk kenyamanan mata di malam hari.
+- **Suara & Notifikasi**: Kontrol penuh atas efek suara dan notifikasi aplikasi.
+- **Edit Profil**: Ubah nama tampilan dan avatar Anda sesuai keinginan.
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+Proyek ini dibangun di atas fondasi teknologi yang kokoh dan modern untuk menjamin stabilitas dan kemudahan pengembangan ke depannya.
+
+| Teknologi            | Deskripsi                                                                                               |
+| :------------------- | :------------------------------------------------------------------------------------------------------ |
+| **React Native**     | Framework utama untuk membangun aplikasi native lintas platform (Android & iOS).                        |
+| **Expo (SDK 52)**    | Platform yang mempercepat pengembangan React Native dengan ekosistem tools yang lengkap.                |
+| **The TypeScript**   | Bahasa pemrograman yang menambahkan tipe statis ke JavaScript, meningkatkan kualitas dan keamanan kode. |
+| **React Navigation** | Menangani navigasi antar layar (Stack & Bottom Tabs) dengan performa native.                            |
+| **Expo SQLite**      | Solusi penyimpanan database lokal yang ringan dan cepat.                                                |
+| **Firebase Auth**    | Layanan backend dari Google untuk autentikasi pengguna yang aman.                                       |
+| **Reanimated**       | Pustaka animasi deklaratif untuk performa 60fps yang halus.                                             |
+| **AsyncStorage**     | Penyimpanan data sederhana (key-value) untuk preferensi pengguna.                                       |
+
+---
+
+## 📸 Cuplikan Layar (Screenshots)
+
+Berikut adalah gambaran visual dari aplikasi FunQuiz Academy:
+
+_(Dianjurkan untuk menambahkan file gambar asli ke folder `assets/screenshots` agar tabel ini tampil sempurna)_
+
+|                           **Halaman Selamat Datang**                           |                            **Beranda Utama**                             |                             **Antarmuka Kuis**                              |
+| :----------------------------------------------------------------------------: | :----------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
+| <img src="./assets/screenshots/welcome.png" alt="Welcome Screen" width="200"/> | <img src="./assets/screenshots/home.png" alt="Home Screen" width="200"/> | <img src="./assets/screenshots/quiz.png" alt="Quiz Interface" width="200"/> |
+|                     _Desain awal yang menyambut pengguna_                      |                    _Navigasi kategori yang intuitif_                     |                    _Tampilan pertanyaan yang interaktif_                    |
+
+|                           **Papan Peringkat**                            |                             **Profil Pengguna**                              |                          **Statistik Belajar**                           |
+| :----------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :----------------------------------------------------------------------: |
+| <img src="./assets/screenshots/rank.png" alt="Leaderboard" width="200"/> | <img src="./assets/screenshots/profile.png" alt="User Profile" width="200"/> | <img src="./assets/screenshots/stats.png" alt="Statistics" width="200"/> |
+|                         _Kompetisi skor global_                          |                            _Menu profil personal_                            |                       _Analisis performa mendalam_                       |
+
+---
+
+## 📂 Struktur Proyek
+
+Kami menerapkan **Clean Architecture** dan pemisahan _concerns_ yang ketat agar kode mudah dipelihara dan dikembangkan oleh tim.
+
+```bash
+src/
+├── components/      # Komponen UI yang dapat digunakan kembali (Buttons, Cards, Headers)
+├── config/          # Konfigurasi eksternal (Firebase, Env Vars)
+├── constants/       # Konstanta global (Warna, Font, Gambar, Terjemahan)
+├── context/         # State Management Global (Bahasa, Tema)
+├── data/            # Data statis dan konten kuis
+├── hooks/           # Custom React Hooks untuk logika yang dapat digunakan kembali
+├── navigation/      # Konfigurasi navigasi aplikasi (Stack & Tab)
+├── screens/         # Logika utama setiap halaman (Screen)
+├── services/        # Logika bisnis & Panggila API (Database, Auth)
+├── styles/          # File styling terpisah untuk setiap layar (Clean & Modular)
+├── types/           # Definisi tipe TypeScript (Interfaces & Types)
+└── utils/           # Fungsi bantu (Storage, Formatting)
+```
+
+---
+
+## 🚀 Panduan Instalasi & Menjalankan
+
+Ikuti langkah-langkah berikut untuk menjalankan proyek ini di mesin lokal Anda.
+
+### Prasyarat
+
+Pastikan Anda telah menginstal:
+
+- **Node.js** (Versi LTS direkomendasikan)
+- **npm** atau **yarn**
+- **Expo Go** di perangkat seluler Anda (Android/iOS)
+
+### Langkah-langkah
+
+1.  **Clone Repositori**
+    Salin kode sumber proyek ke komputer Anda:
 
     ```bash
-    git clone https://github.com/yourusername/FunQuizAcademy.git
-    cd FunQuizAcademy
+    git clone https://github.com/muhamadghibran/FunQuizAcademy-Mobile-App-Project.git
+    cd FunQuizAcademy-Mobile-App-Project
     ```
 
-2.  **Install dependencies**
+2.  **Instal Dependensi**
+    Unduh semua pustaka yang diperlukan:
 
     ```bash
     npm install
     ```
 
-3.  **Start the development server**
+3.  **Jalankan Server Development**
+    Mulai server Expo lokal:
 
     ```bash
     npx expo start
     ```
 
-4.  **Run on Device**
-    - Scan the QR code with **Expo Go** (Android) or the Camera app (iOS).
+4.  **Jalankan di Perangkat**
+    - Buka aplikasi **Expo Go** di HP Anda.
+    - Scan **QR Code** yang muncul di terminal atau browser.
+    - Tunggu hingga aplikasi memuat bundle JavaScript.
 
-## 📂 Project Structure
+---
 
-The project follows a strict **Clean Architecture** to ensure scalability and maintainability.
+## 🤝 Cara Berkontribusi
 
-```
-src/
-├── components/      # Reusable UI components (Buttons, Cards, Headers)
-├── config/          # Configuration files (Firebase, Env)
-├── constants/       # Global constants (Colors, Fonts, Images, Translations)
-├── context/         # React Context (Language, Theme)
-├── data/            # Static data (Quiz Content)
-├── hooks/           # Custom React Hooks (useQuiz, useVoiceInput)
-├── navigation/      # Navigation configuration (AppNavigator)
-├── screens/         # Main Screen Logic (View Controllers)
-├── services/        # Business Logic & API Calls (Database, Auth)
-├── styles/          # Separated StyleSheets for Screens
-├── types/           # TypeScript Definitions
-└── utils/           # Helper functions (Storage, Formatting)
-```
+Kontribusi adalah inti dari komunitas open-source. Kami sangat menghargai setiap kontribusi Anda, baik itu melaporkan _bug_, memperbaiki kode, atau menambahkan fitur baru.
 
-## 🤝 Contributing
+1.  **Fork** proyek ini.
+2.  Buat **Branch** fitur baru (`git checkout -b fitur/FiturKeren`).
+3.  **Commit** perubahan Anda (`git commit -m 'Menambahkan fitur keren XYZ'`).
+4.  **Push** ke Branch (`git push origin fitur/FiturKeren`).
+5.  Buka **Pull Request** di GitHub.
 
-Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+---
 
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
+## 📄 Lisensi
 
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
+Didistribusikan di bawah Lisensi MIT. Lihat file `LICENSE` untuk informasi lebih lanjut.
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by <strong>Muhamad Ghibran</strong></p>
+  <p>Dibuat dengan ❤️ dan ☕ oleh <strong>Muhamad Ghibran</strong></p>
+  <p><em>Jangan lupa berikan ⭐ jika Anda menyukai proyek ini!</em></p>
 </div>
