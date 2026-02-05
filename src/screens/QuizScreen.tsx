@@ -85,7 +85,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
     if (intervalRef.current) clearInterval(intervalRef.current);
     setSelectedAnswer(answerId);
     setShowResult(true);
-    // Use ID to ID check which is safe
+
     const isCorrect =
       answerId === currentQuiz.correctAnswer ||
       answerId ===
@@ -135,7 +135,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
 
   const checkCorrectness = (ansId: string, ansText: string) => {
     const trueAnswer = currentQuiz.answers.find(
-      (a) => a.text === currentQuiz.correctAnswer,
+      (a) => a.text === currentQuiz.correctAnswer
     );
     if (trueAnswer) {
       return trueAnswer.id === ansId;
@@ -145,7 +145,7 @@ export const QuizScreen: React.FC<QuizScreenProps> = ({
 
   const getAnswerState = (
     answerId: string,
-    answerText: string,
+    answerText: string
   ): "correct" | "wrong" | "default" | "disabled" | "hidden" => {
     const isSelected = selectedAnswer === answerId;
     const isCorrect = checkCorrectness(answerId, answerText);

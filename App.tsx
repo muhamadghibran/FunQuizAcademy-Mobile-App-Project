@@ -20,7 +20,6 @@ export default function App() {
   });
 
   if (fontError) {
-    // Handle font error quietly or with specific error boundary
   }
 
   const [dbInitialized, setDbInitialized] = React.useState(false);
@@ -30,7 +29,6 @@ export default function App() {
       try {
         await initDatabase();
       } catch (e) {
-        // Error initializing DB
       } finally {
         setDbInitialized(true);
       }

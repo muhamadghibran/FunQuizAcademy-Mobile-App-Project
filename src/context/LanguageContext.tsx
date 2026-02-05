@@ -42,7 +42,6 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   const t = (key: string) => {
-    // @ts-ignore
     return translations[language][key] || key;
   };
 

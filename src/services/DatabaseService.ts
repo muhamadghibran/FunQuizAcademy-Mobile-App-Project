@@ -6,7 +6,6 @@ const dbName = "funquiz.db";
 
 let dbInstance: SQLite.SQLiteDatabase | null = null;
 
-// Helper to get connection
 export const getDBConnection = async () => {
   if (dbInstance) {
     return dbInstance;
@@ -62,7 +61,7 @@ export const initDatabase = async () => {
     `);
 
     const result = await db.getAllAsync<{ count: number }>(
-      "SELECT count(*) as count FROM categories",
+      "SELECT count(*) as count FROM categories"
     );
     if (result && result[0] && result[0].count === 0) {
       await seedDatabase(db);
@@ -88,7 +87,7 @@ export const saveUserProfile = async (data: any) => {
 export const getUserProfile = async () => {
   const db = await getDBConnection();
   const result = await db.getFirstAsync<{ json_data: string }>(
-    "SELECT json_data FROM users WHERE id = 1",
+    "SELECT json_data FROM users WHERE id = 1"
   );
   if (result) {
     return JSON.parse(result.json_data);
@@ -101,13 +100,7 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
     for (const cat of CATEGORIES) {
       await db.runAsync(
         "INSERT OR IGNORE INTO categories (id, name, description, color, total_questions) VALUES (?, ?, ?, ?, ?)",
-        [
-          cat.id,
-          cat.name,
-          cat.description || "",
-          cat.color,
-          cat.totalQuestions,
-        ],
+        [cat.id, cat.name, cat.description || "", cat.color, cat.totalQuestions]
       );
 
       const questions = QUIZZES[cat.id];
@@ -123,13 +116,13 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
               q.correctAnswer,
               q.difficulty,
               q.points,
-            ],
+            ]
           );
 
           for (const ans of q.answers) {
             await db.runAsync(
               "INSERT OR IGNORE INTO answers (id, question_id, text) VALUES (?, ?, ?)",
-              [ans.id, q.id, ans.text],
+              [ans.id, q.id, ans.text]
             );
           }
         }
@@ -141,26 +134,24 @@ const seedDatabase = async (db: SQLite.SQLiteDatabase) => {
 };
 
 export const getQuestionsByCategory = async (
-  categoryId: string,
+  categoryId: string
 ): Promise<Quiz[]> => {
   const db = await getDBConnection();
   const questions = await db.getAllAsync<any>(
     "SELECT * FROM questions WHERE category_id = ?",
-    [categoryId],
+    [categoryId]
   );
 
   const result: Quiz[] = [];
 
-  // Helper to find static data for image hydration
   const staticQuestions = QUIZZES[categoryId] || [];
 
   for (const q of questions) {
     const answers = await db.getAllAsync<Answer>(
       "SELECT id, text FROM answers WHERE question_id = ?",
-      [q.id],
+      [q.id]
     );
 
-    // Hydrate image from static data if available
     const staticQ = staticQuestions.find((sq) => sq.id === q.id);
     const imageSource = staticQ ? staticQ.image : null;
 
@@ -182,13 +173,13 @@ export const getQuestionsByCategory = async (
 export const saveQuizHistory = async (
   categoryId: string,
   score: number,
-  totalQuestions: number,
+  totalQuestions: number
 ) => {
   const db = await getDBConnection();
   const date = new Date().toISOString();
   await db.runAsync(
     "INSERT INTO history (category_id, score, total_questions, date) VALUES (?, ?, ?, ?)",
-    [categoryId, score, totalQuestions, date],
+    [categoryId, score, totalQuestions, date]
   );
 };
 

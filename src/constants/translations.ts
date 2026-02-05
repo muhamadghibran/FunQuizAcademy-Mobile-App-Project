@@ -2,7 +2,6 @@ export type Language = "en" | "id";
 
 export const translations = {
   en: {
-    // Profile Screen
     profileTitle: "My Profile",
     level: "Level",
     quizzer: "Quizzer",
@@ -13,7 +12,6 @@ export const translations = {
     myStatistics: "My Statistics",
     logOut: "Log Out",
 
-    // Home Screen
     hello: "Hello",
     playGreeting: "What would you like to play today?",
     unfinishedGames: "Unfinished Games",
@@ -21,14 +19,12 @@ export const translations = {
     questionsCount: "Questions",
     loading: "Loading...",
 
-    // Categories
     cat_sport: "Sport Quiz",
     cat_science: "Science Quiz",
     cat_math: "Mathematics Quiz",
     cat_animals: "Naming Animals Quiz",
     cat_other: "Other Quiz",
 
-    // Quiz Screen
     questionOf: "Question",
     of: "of",
     next: "Next",
@@ -39,7 +35,6 @@ export const translations = {
     quizComplete: "Quiz Complete!",
     coinsEarned: "Coins",
 
-    // Settings Screen
     settingsTitle: "Settings",
     preferences: "Preferences",
     pushNotifications: "Push Notifications",
@@ -55,7 +50,6 @@ export const translations = {
     privacyPolicy: "Privacy Policy",
     aboutUs: "About Us",
 
-    // Common
     featureComingSoon: "This feature is coming soon!",
     comingSoon: "Coming Soon",
     success: "Success",
@@ -67,7 +61,6 @@ export const translations = {
     ok: "OK",
   },
   id: {
-    // Profile Screen
     profileTitle: "Profil Saya",
     level: "Level",
     quizzer: "Quizzer", // Usually kept as is or "Pemain Kuis"
@@ -78,7 +71,6 @@ export const translations = {
     myStatistics: "Statistik Saya",
     logOut: "Keluar",
 
-    // Home Screen
     hello: "Halo",
     playGreeting: "Ingin main apa hari ini?",
     unfinishedGames: "Permainan Belum Selesai",
@@ -86,14 +78,12 @@ export const translations = {
     questionsCount: "Pertanyaan",
     loading: "Memuat...",
 
-    // Categories
     cat_sport: "Kuis Olahraga",
     cat_science: "Kuis Sains",
     cat_math: "Kuis Matematika",
     cat_animals: "Kuis Nama Hewan",
     cat_other: "Kuis Lainnya",
 
-    // Quiz Screen
     questionOf: "Pertanyaan",
     of: "dari",
     next: "Lanjut",
@@ -104,7 +94,6 @@ export const translations = {
     quizComplete: "Kuis Selesai!",
     coinsEarned: "Koin",
 
-    // Settings Screen
     settingsTitle: "Pengaturan",
     preferences: "Preferensi",
     pushNotifications: "Notifikasi Push",
@@ -120,7 +109,6 @@ export const translations = {
     privacyPolicy: "Kebijakan Privasi",
     aboutUs: "Tentang Kami",
 
-    // Quiz Content (Samples)
     "sport-1": "Berapa jumlah pemain bola basket di lapangan?",
     "sport-1_1": "5",
     "sport-1_2": "10",
@@ -137,7 +125,6 @@ export const translations = {
     "science-11_2": "Es",
     "science-11_3": "Uap",
 
-    // Common
     featureComingSoon: "Fitur ini akan segera hadir!",
     comingSoon: "Segera Hadir",
     success: "Berhasil",

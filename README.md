@@ -1,7 +1,5 @@
 <div align="center">
 
-  <img src="./assets/images/adaptive-icon.png" alt="Logo" width="120" height="120" />
-  
   <h1>🎓 FunQuiz Academy</h1>
   
   <p>
@@ -20,9 +18,20 @@
     <i>Aplikasi pembelajaran seluler yang interaktif, edukatif, dan didesain dengan indah menggunakan teknologi React Native modern.</i>
   </p>
 
-  <br />
-
 </div>
+
+---
+
+## 📑 Daftar Isi
+
+- [Tentang Proyek](#-tentang-proyek)
+- [Fitur Unggulan](#-fitur-unggulan)
+- [Teknologi yang Digunakan](#-teknologi-yang-digunakan)
+- [Cuplikan Layar](#-cuplikan-layar-screenshots)
+- [Struktur Proyek](#-struktur-proyek)
+- [Instalasi](#-panduan-instalasi--menjalankan)
+- [Kontribusi](#-cara-berkontribusi)
+- [Lisensi](#-lisensi)
 
 ---
 
@@ -74,7 +83,7 @@ Tidak ada sinyal? Tidak masalah!
 
 ### 5. 🏆 Papan Peringkat & Statistik
 
-- **Leaderboard Global**: Bandingkan skor tertinggi Anda dengan pemain lain di seluruh dunia (menggunakan MockAPI).
+- **Leaderboard Global**: Bandingkan skor tertinggi Anda dengan pemain lain di seluruh dunia.
 - **Statistik Personal**: Pantau perkembangan belajar Anda dengan grafik dan riwayat nilai yang terperinci. Lihat di mana kekuatan dan kelemahan Anda.
 
 ### 6. 🌍 Dukungan Multi-Bahasa
@@ -101,7 +110,7 @@ Proyek ini dibangun di atas fondasi teknologi yang kokoh dan modern untuk menjam
 | :------------------- | :------------------------------------------------------------------------------------------------------ |
 | **React Native**     | Framework utama untuk membangun aplikasi native lintas platform (Android & iOS).                        |
 | **Expo (SDK 52)**    | Platform yang mempercepat pengembangan React Native dengan ekosistem tools yang lengkap.                |
-| **The TypeScript**   | Bahasa pemrograman yang menambahkan tipe statis ke JavaScript, meningkatkan kualitas dan keamanan kode. |
+| **TypeScript**       | Bahasa pemrograman yang menambahkan tipe statis ke JavaScript, meningkatkan kualitas dan keamanan kode. |
 | **React Navigation** | Menangani navigasi antar layar (Stack & Bottom Tabs) dengan performa native.                            |
 | **Expo SQLite**      | Solusi penyimpanan database lokal yang ringan dan cepat.                                                |
 | **Firebase Auth**    | Layanan backend dari Google untuk autentikasi pengguna yang aman.                                       |
@@ -114,17 +123,11 @@ Proyek ini dibangun di atas fondasi teknologi yang kokoh dan modern untuk menjam
 
 Berikut adalah gambaran visual dari aplikasi FunQuiz Academy:
 
-_(Dianjurkan untuk menambahkan file gambar asli ke folder `assets/screenshots` agar tabel ini tampil sempurna)_
-
-|                           **Halaman Selamat Datang**                           |                            **Beranda Utama**                             |                             **Antarmuka Kuis**                              |
-| :----------------------------------------------------------------------------: | :----------------------------------------------------------------------: | :-------------------------------------------------------------------------: |
-| <img src="./assets/screenshots/welcome.png" alt="Welcome Screen" width="200"/> | <img src="./assets/screenshots/home.png" alt="Home Screen" width="200"/> | <img src="./assets/screenshots/quiz.png" alt="Quiz Interface" width="200"/> |
-|                     _Desain awal yang menyambut pengguna_                      |                    _Navigasi kategori yang intuitif_                     |                    _Tampilan pertanyaan yang interaktif_                    |
-
-|                           **Papan Peringkat**                            |                             **Profil Pengguna**                              |                          **Statistik Belajar**                           |
-| :----------------------------------------------------------------------: | :--------------------------------------------------------------------------: | :----------------------------------------------------------------------: |
-| <img src="./assets/screenshots/rank.png" alt="Leaderboard" width="200"/> | <img src="./assets/screenshots/profile.png" alt="User Profile" width="200"/> | <img src="./assets/screenshots/stats.png" alt="Statistics" width="200"/> |
-|                         _Kompetisi skor global_                          |                            _Menu profil personal_                            |                       _Analisis performa mendalam_                       |
+<div align="center">
+  <img src="./assets/screenshots/screen1.png" width="30%" style="margin: 5px;" />
+  <img src="./assets/screenshots/screen2.png" width="30%" style="margin: 5px;" />
+  <img src="./assets/screenshots/screen3.png" width="30%" style="margin: 5px;" />
+</div>
 
 ---
 

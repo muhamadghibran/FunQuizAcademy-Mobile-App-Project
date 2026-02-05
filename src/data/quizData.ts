@@ -921,7 +921,6 @@ export const QUIZZES: { [key: string]: Quiz[] } = {
     },
   ],
 
-  // --- SOAL ANIMALS ---
   animals: [
     {
       id: "animals-1",

@@ -16,7 +16,6 @@ export const saveUserProgress = async (
   progress: UserProgress,
 ): Promise<void> => {
   try {
-    // Save to SQLite
     await dbSaveUserProfile(progress);
   } catch (error) {
     console.error("Error saving user progress:", error);
